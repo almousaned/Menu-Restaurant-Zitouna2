@@ -1,0 +1,174 @@
+cat > /tmp/build_html.py << 'PYEOF'
+import base64
+
+with open('/tmp/logo_uri.txt') as f:
+    logo_uri = f.read().strip()
+
+html = f'''<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ZiTOUNA 2 — Restaurant | Menu</title>
+  <meta name="description" content="Menu complet du Restaurant ZiTOUNA 2 — Spécialités Tunisiennes, Fruits de Mer, Grillades · Sfax, Tunisie"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Cinzel:wght@400;600;700&family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════
+       SKIP LINK (Accessibility)
+  ═══════════════════════════════════ -->
+  <a class="skip-link" href="#menu-main">Passer au menu</a>
+
+  <!-- ═══════════════════════════════════
+       HEADER
+  ═══════════════════════════════════ -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+
+      <!-- Logo mark for nav -->
+      <a href="#hero" class="nav-logo" aria-label="ZiTOUNA 2 – Accueil">
+        <img src="{logo_uri}" alt="ZiTOUNA 2 Restaurant" class="nav-logo-img"/>
+        <div class="nav-brand-text">
+          <span class="nav-brand-main">ZITOUNA<sup class="nav-brand-2">2</sup></span>
+          <span class="nav-brand-sub">Restaurant</span>
+        </div>
+      </a>
+
+      <!-- Search -->
+      <div class="header-search" role="search">
+        <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true" width="16" height="16">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/>
+          <path d="M16.5 16.5L22 22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <input type="search" id="search-input" class="search-input"
+               placeholder="Rechercher un plat…" autocomplete="off"
+               aria-label="Rechercher dans le menu"/>
+        <button id="search-clear" class="search-clear" hidden aria-label="Effacer">✕</button>
+      </div>
+
+      <!-- Controls -->
+      <div class="header-controls">
+        <button id="theme-toggle" class="ctrl-btn" aria-label="Mode sombre/clair" title="Changer le thème">
+          <svg id="icon-moon" viewBox="0 0 24 24" width="17" height="17"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="currentColor"/></svg>
+          <svg id="icon-sun"  viewBox="0 0 24 24" width="17" height="17" style="display:none"><circle cx="12" cy="12" r="5" fill="currentColor"/><line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2"/><line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2"/><line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2"/><line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Category navigation tabs -->
+    <nav class="cat-nav" id="cat-nav" aria-label="Catégories">
+      <button class="cat-nav-arrow" id="nav-arrow-l" aria-label="Défiler gauche">&#8249;</button>
+      <div class="cat-nav-track" id="cat-nav-track" role="tablist">
+        <!-- Populated by script.js -->
+      </div>
+      <button class="cat-nav-arrow" id="nav-arrow-r" aria-label="Défiler droite">&#8250;</button>
+    </nav>
+  </header>
+
+  <!-- ═══════════════════════════════════
+       HERO
+  ═══════════════════════════════════ -->
+  <section class="hero" id="hero" aria-label="ZiTOUNA 2 Restaurant">
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-leaves" aria-hidden="true">
+      <span class="leaf leaf-1">🌿</span>
+      <span class="leaf leaf-2">🌿</span>
+      <span class="leaf leaf-3">🌿</span>
+    </div>
+    <div class="hero-content">
+      <div class="hero-logo-wrap">
+        <img src="logo.png" alt="ZiTOUNA 2" class="hero-logo"/>
+      </div>
+      <h1 class="hero-title">
+        <span class="hero-zitouna">ZITOUNA</span>
+        <span class="hero-num">2</span>
+      </h1>
+      <p class="hero-subtitle">Restaurant</p>
+      <div class="hero-divider" aria-hidden="true">
+        <span></span><svg viewBox="0 0 24 24" width="18" height="18"><polygon points="12,2 22,12 12,22 2,12" fill="currentColor"/></svg><span></span>
+      </div>
+      <p class="hero-tagline">
+        <span lang="fr">Spécialités Tunisiennes &amp; Fruits de Mer</span>
+        <span class="hero-tagline-sep" aria-hidden="true"> · </span>
+        <span lang="ar" dir="rtl">المطبخ التونسي الأصيل</span>
+      </p>
+      <div class="hero-info">
+        <a href="tel:+21620513513" class="hero-info-item">
+          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.59 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          +216 20 513 513
+        </a>
+        <span class="hero-info-sep" aria-hidden="true">·</span>
+        <span class="hero-info-item">
+          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          Route Sokra Km 1, Résidence Yasmine — Sfax
+        </span>
+      </div>
+      <a href="#menu-main" class="hero-cta" id="hero-cta">
+        Voir le Menu
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+    <div class="hero-scroll-hint" aria-hidden="true"><span></span></div>
+  </section>
+
+  <!-- Search results banner -->
+  <div class="search-banner" id="search-banner" hidden role="status" aria-live="polite">
+    <span>Résultats pour : <strong id="search-term-display"></strong></span>
+    <span class="search-count" id="search-count"></span>
+    <button class="search-banner-clear" id="search-banner-clear">✕ Effacer</button>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       MENU
+  ═══════════════════════════════════ -->
+  <main id="menu-main" aria-label="Menu complet">
+    <!-- Populated by script.js -->
+  </main>
+
+  <!-- ═══════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-logo-block">
+        <img src="logo.png" alt="ZiTOUNA 2" class="footer-logo"/>
+        <div class="footer-brand">
+          <span class="footer-brand-main">ZiTOUNA<sup>2</sup></span>
+          <span class="footer-brand-sub">Restaurant</span>
+        </div>
+      </div>
+      <div class="footer-contact">
+        <h3 class="footer-heading">Contact &amp; Adresse</h3>
+        <p><a href="tel:+21620513513">+216 20 513 513</a></p>
+        <p>Route Sokra Km 1</p>
+        <p>Résidence Yasmine — Sfax, Tunisie</p>
+      </div>
+      <div class="footer-hours">
+        <h3 class="footer-heading">Horaires</h3>
+        <p>Lun — Dim</p>
+        <p>12h00 — 23h30</p>
+        <p lang="ar" dir="rtl" class="footer-ar">مرحباً بكم في كل وقت</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Restaurant ZITOUNA 2 · Tous droits réservés · Sfax, Tunisie</p>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button class="back-to-top" id="back-to-top" aria-label="Retour en haut de page">
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+      <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>'''
+
+
