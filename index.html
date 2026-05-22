@@ -1,10 +1,4 @@
-cat > /tmp/build_html.py << 'PYEOF'
-import base64
-
-with open('/tmp/logo_uri.txt') as f:
-    logo_uri = f.read().strip()
-
-html = f'''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr" data-theme="light">
 <head>
   <meta charset="UTF-8"/>
@@ -32,7 +26,7 @@ html = f'''<!DOCTYPE html>
 
       <!-- Logo mark for nav -->
       <a href="#hero" class="nav-logo" aria-label="ZiTOUNA 2 – Accueil">
-        <img src="{logo_uri}" alt="ZiTOUNA 2 Restaurant" class="nav-logo-img"/>
+        <img src="logo.png" alt="ZiTOUNA 2 Restaurant" class="nav-logo-img"/>
         <div class="nav-brand-text">
           <span class="nav-brand-main">ZITOUNA<sup class="nav-brand-2">2</sup></span>
           <span class="nav-brand-sub">Restaurant</span>
